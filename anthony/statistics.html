@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+
+    <title>Statistics</title>
+
+    <link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='stylesheets/css/style.min.css'>
+</head>
+
+<body>
+
+    <div id="header" class="container-fluid header">
+        <a href="../index.html"><img src="img/Header.png"></a>
+    </div>
+    
+    <div class="container">
+        <div class="row no-gutters">
+            <div class="col-xs-4 col-centered">
+                <!-- Flip Contaier -->
+                <div id="graphContainer" class="flip-container graph" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flipper">
+                        <div id="chartLocation" class="front">
+                            
+                        </div>
+                        <div id="dataLocation" class="back">
+                            <img src="img/infoScreen.png">
+                            <img id="projectV" src="img/projectViewsSm.png" title="Project Views">
+                            <p id="projectVInfo">23</p>
+                            <img id="profileV" src="img/profileViewsSm.png" title="Profile Views">
+                            <p id="profileVInfo">48</p>
+                            <img id="appreciations" src="img/thumbSm.png" title="Appreciations Recieved">
+                            <p id="appreciationsInfo">34</p>
+                            <img id="projectC" src="img/projectComments.png" title="Project Comments">
+                            <p id="projectCInfo">27</p>
+                            <img id="backBtn" src="img/backButtonBold.png">
+                            <a href="../forrest/projects.html"><img class="projLink" id="codyProj" src="img/codyProj.jpg"></a>
+                            <a href="../forrest/projects.html"><img class="projLink" id="ashProj" src="img/ashProj.jpg"></a>
+                            <a href="../forrest/projects.html"><img class="projLink" id="filipProj" src="img/filipProj.jpg"></a>
+                            <a href="../cam/profiles.html"><img class="profLink" src="img/profile.png"></a>
+                            <p id="profTitle">Profile</p>
+                            <p id="projTitle">Projects</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xs-4 filler"></div>
+        </div>
+    </div>
+
+    <div class="iconContainer">
+        <img id="cody" class="icons" src="img/cody.png">
+        <img id="ash" class="icons" src="img/ash.png">
+        <img id="filip" class="icons" src="img/filip.png">
+    </div>
+
+    
+	<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../node_modules/countup/countUp.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="js/compiled/app.min.js"></script>
+</body>
+
+</html>

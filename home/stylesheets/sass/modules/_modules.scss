@@ -1,0 +1,72 @@
+//**********************//
+//**** Modules SASS ****//
+//**********************//
+
+.intro {
+    color: #C3C3C3;
+    position: relative;
+
+    .backgroundWrapper {
+        @include positioning(absolute);
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        transform-origin: top left;
+
+        .background {
+            background: linear-gradient(black, rgb(70, 70, 70));
+            width: 100%;
+            height: 100%;
+        }
+
+        .lip {
+            height: 20px;
+            display: block;
+            content: '';
+            @include positioning(absolute, $b: 0, $l: 0, $r: 0);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            background: linear-gradient(black, rgb(70, 70, 70));
+        }
+    }
+
+    .content {
+        z-index: 100;
+        position: relative;
+
+        .logo {
+            width: 100%;
+            display: block;
+        }
+
+        .introText,
+        .logo {
+            max-width: 400px;
+            margin: 30px auto;
+        }
+    }
+}
+
+.buttons {
+    a {
+        display: block;
+        margin: 0 auto 10px 0;
+        width: 100%;
+        color: white;
+        padding: 30px 50px;
+        background: linear-gradient(black, rgb(70, 70, 70));
+        border: 5px solid #717171;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+        outline: 0;
+        text-align: center;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.behanceLogo {
+    margin: 0 auto 30px auto;
+    display: block;
+}

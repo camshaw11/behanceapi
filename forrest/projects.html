@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+
+    <title>Projects</title>
+
+    <link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='../node_modules/slick-carousel/slick/slick-theme.css'>
+    <link rel='stylesheet' href='../node_modules/font-awesome/css/font-awesome.min.css'>
+    <link rel='stylesheet' href='stylesheets/css/style.min.css'>
+
+    <script src='../node_modules/handlebars/dist/handlebars.min.js'></script>
+</head>
+<body>
+    <header id='header' class='header'>
+        <div class='wrapper'>
+            <a href='../index.html'><img class='logo' src='img/creoLogo.png' alt='Creo Logo'></a>
+        </div>
+        <div class='lip'></div>
+    </header>
+
+    <div class='projectControls'>
+        <div id='drawerOpener' class='drawerOpener'>
+            <p>Filters <i class='fa fa-angle-double-up'></i></p>
+        </div>
+
+        <div id='sortingControls' class='sorting padding-10'>
+            <div class='sortingGroup inlineBlock'>
+                <span class='btn-group orderingButtons'>
+                    <button class='btn controlButton orderButton active' type='button' data-sortonly='asc' data-toggle='tooltip' data-placement='bottom' title='Ascending Order'><i class='fa fa-angle-up'></i></button>
+                    <button class='btn controlButton orderButton' type='button' data-sortonly='desc' data-toggle='tooltip' data-placement='bottom' title='Descending Order'><i class='fa fa-angle-down'></i></button>
+                    <button class='btn controlButton orderButtonInlineControl' type='button' data-mixitup-control data-sort='random' data-toggle='tooltip' data-placement='bottom' title='Random'><i class='fa fa-random'></i></button>
+                </span>
+            </div>
+
+            <div class='dropdownWrapper'>
+                <div class='dropdown'>
+                    <button class='btn dropdown-toggle filterToggle' type='button' id='dropdownSortButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Sort By: <span id='sortingTopic'>Publish Date</span></button>
+                    <div class='dropdown-menu' aria-labelledby='dropdownSort'>
+                        <div class='controlButton sortButton dropdown-item active' data-sortonly='published-on'>Publish Date</div>
+                        <div class='controlButton sortButton dropdown-item' data-sortonly='likes'>Likes</div>
+                        <div class='controlButton sortButton dropdown-item' data-sortonly='comments'>Comments</div>
+                        <div class='controlButton sortButton dropdown-item' data-sortonly='views'>Views</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='dropdownWrapper'>
+                <div class='dropdown'>
+                    <button class='btn dropdown-toggle filterToggle' type='button' id='dropdownFilterButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Filter By: <span id='filteringTopic'>All Designers</span></button>
+                    <div class='dropdown-menu' aria-labelledby='dropdownFilterButton'>
+                        <div class='controlButton filterButton dropdown-item active' data-mixitup-control data-filter='all'>All Designers</div>
+                        <hr>
+                        <div class='controlButton filterButton dropdown-item' data-mixitup-control data-filter='.id-6053747'>Ash Thorp</div>
+                        <div class='controlButton filterButton dropdown-item' data-mixitup-control data-filter='.id-544146'>Cody Cobb</div>
+                        <div class='controlButton filterButton dropdown-item' data-mixitup-control data-filter='.id-4342293'>Filip Hodas</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id='projects' class='projects row'></div>
+    
+    <div>
+        <div class='loadMoreProjectsButtonWrapper'>
+            <button id='loadMoreProjects' class='loadMoreProjects disabledButton' type='button'>Load More Projects <i class='fa fa-angle-down'></i></button>
+        </div>
+    </div>
+   
+    <img id='loader' class='loader' src='img/loader.svg' alt='AJAX Loader'>
+
+    <div id='modalMask' class='modalMask'>
+        <div class='closeWrapper'>
+            <div class='closeIcon'>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div id='modalContent' class='modalContent'></div>
+    </div>
+
+    <div id='errorModal' class='errorModal'>
+        <div class='errorMessage inner'>
+            <h3>Oops! You've run out of requests!</h3>
+            <p>I'm sorry! It looks like the Behance API has stopped sending us data!</p>
+            <p>This happens sometimes. We should be up back to normal in under an hour.</p>
+            <p>If this message isn't here when you reload the page, you're good to go!</p>
+        </div>
+    </div>
+
+    <script id='projectTemplate' type='text/template7'>
+        <div class='project col-sm-12 col-md-6 col-lg-4 col-xl-3 col-xxl-2 {{#each creatorID}}id-{{this}} {{/each}}' data-published-on={{publishedOn}} data-likes={{stats.likes}} data-views={{stats.views}} data-comments={{stats.comments}} data-name={{projectName}} data-order={{counter}}>
+            <div class='projectInner' data-projectid={{projectID}}>
+                <div class='projectImageWrapper'>
+                    <img src={{coverImage}} alt={{projectName}} />
+                    <div class='projectStats'>
+                        <span class='stat'>
+                            <i class='fa fa-thumbs-o-up'></i>
+                            <span>{{stats.likes}}</span>
+                        </span>
+                        <span class='stat'>
+                            <i class='fa fa-eye'></i>
+                            <span>{{stats.views}}</span>
+                        </span>
+                        <span class='stat'>
+                            <i class='fa fa-comments-o'></i>
+                            <span>{{stats.comments}}</span>
+                        </span>
+                    </div>
+                </div>
+                <div class='inner'>
+                    <p class='projectTitle'>{{projectName}}</p>
+                    <hr>
+                    <p class='projectCreator'>by {{creator}}</p>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id='projectDetailsTemplate' type='text/template7'>
+        <div class='projectDetails'>
+            <div id='images' class='images'>
+                {{#each articles}}
+                <div class='image'>
+                    <img data-lazy={{this}} src='img/loader.svg' />
+                </div>
+                {{/each}}
+            </div>
+            <div class='projectInfo inner'>
+                <div>
+                    <p class='projectTitle'>{{projectName}}</p>
+                    <p class='projectCreator'>by {{#each creators}}<a href={{this.url}} target='_blank'>{{this.name}}</a> {{/each}}</p>
+                    <small><a href={{behanceURL}} target='_blank'>View project on Behance <i class='fa fa-external-link'></i></a></small>
+                </div>
+                <p>Published: {{creationDate}}</p>
+                <div class='projectStats'>
+                    <span class='stat'>
+                        <span><b>Likes: </b></span>
+                        <span>{{stats.likes}}</span>
+                    </span>
+                    <span class='stat'>
+                        <span><b>Views: </b></span>
+                        <span>{{stats.views}}</span>
+                    </span>
+                    <span class='stat'>
+                        <span><b>Comments: </b></span>
+                        <span>{{stats.comments}}</span>
+                    </span>
+                </div>
+                <hr>
+                <p class='projectTitle'>Fields:</p>
+                <p class='paragraphMargin'>{{fieldsString}}</p>
+                <hr>
+                {{#if description}}
+                    <p class='projectTitle'>Description:</p>
+                    <p class='paragraphMargin'>{{description}}</p>
+                    <hr>
+                {{/if}}
+                <div>
+                    <p class='projectTitle'>Comments:</p>
+                    <div id='comments'></div>
+                    <button id='loadMoreComments' class='loadMoreComments disabledButton' type='button' data-projectid={{projectID}}>
+                        <span>Load more comments</span>
+                        <i class='fa fa-angle-down'></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id='commentTemplate' type='text/template7'>
+        <div class='comment'>
+            <img src={{commenter.image}} alt={{commenter.name}} />
+            <div class='nameAndDate'>
+                <p><b><a href={{commenter.link}} target='_blank'>{{commenter.name}}</a></b></p>
+                <small class='publishedOnText'>{{publishedOn}}</small>
+            </div>
+            <p class='commentText'>{{comment}}</p>
+        </div>
+    </script>
+    
+    <script src='../node_modules/jquery/dist/jquery.min.js'></script>
+    <script src='../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'></script>
+    <script src='../node_modules/moment/min/moment.min.js'></script>
+    <script src='../node_modules/mixitup/dist/mixitup.min.js'></script>
+    <script src='../node_modules/slick-carousel/slick/slick.min.js'></script>
+    <script src='js/compiled/app.min.js'></script>
+</body>
+</html>

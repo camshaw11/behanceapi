@@ -1,0 +1,110 @@
+//****************************//
+//**** Media Queries SASS ****//
+//****************************//
+
+@media screen and (min-width: 800px) {
+    .loadMoreProjects {
+        width: 350px;
+        margin: 0 auto;
+    }
+
+    .projectControls {
+        @include positioning(sticky, 10px, 0, 0, 0);
+        width: auto;
+        margin: 0 0 0 auto;
+
+        .drawerOpener {
+            display: none;
+        }
+    }
+
+    .sorting {
+        border-radius: $borderRadius;
+        display: grid!important; // Has to overwrite the inline CSS populated through JS toggle
+        grid-template-columns: repeat(3, 1fr);
+        margin: 10px 10px 0 10px;
+
+        .sortingGroup,
+        .dropdownWrapper {
+            margin-bottom: 0;
+            width: 95%;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .modalContent {
+        @include positioning(fixed, 50px, 50px, 50px, 50px);
+    }
+
+    .projectDetails {
+        display: flex;
+        height: 100%;
+
+        .images {
+            flex: 1;
+
+            .image {
+                padding: 30px 50px;
+                vertical-align: middle;
+
+                img {
+                    object-fit: contain;
+                    box-shadow: none;
+                    filter: drop-shadow($lightBoxShadow);
+                    max-height: 100%;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
+
+    .projectInfo {
+        width: 375px;
+        max-width: 500px;
+        overflow-y: scroll;
+    }
+
+    // Slick
+    .slick-track {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slick-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .slick-list {
+        height: 100%;
+    }
+
+    .slick-next,
+    .slick-prev {
+        &::before {
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .projectInfo {
+        width: 500px;
+    }
+}
+
+@media screen and (min-width: 1660px) {
+    // Adding an extra bootstrap class
+    .col-xxl-2 {
+        flex: 0 0 percentage(1 / 6);
+        max-width: percentage(1 / 6);
+    }
+}

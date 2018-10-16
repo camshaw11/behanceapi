@@ -1,0 +1,33 @@
+//***************************//
+//**** Slick Config SASS ****//
+//***************************//
+
+.slick-slide {
+    display: inline-block;
+    outline: 0;
+}
+
+.slick-list {
+    overflow: hidden;
+}
+
+.slick-prev {
+    left: 0px;
+}
+
+.slick-next {
+    right: 0px;
+}
+
+.slick-next,
+.slick-prev {
+    width: 32px;
+    height: 32px;
+    z-index: 1000;
+
+    &::before {
+        color: $darkColor;
+        font-family: FontAwesome;
+        font-size: 32px;
+    }
+}

@@ -1,0 +1,25 @@
+//****************************//
+//**** Media Queries SASS ****//
+//****************************//
+
+@media screen and (min-width: 700px) {
+    .intro {
+        .backgroundWrapper {
+            transform: skewY(-30deg);
+            min-height: 650px;
+            max-height: 800px;
+            height: 75vh;
+        }
+
+        .content {
+            .introText,
+            .logo {
+                margin: 30px 20px;
+            }
+        }
+    }
+
+    .behanceLogo {
+        margin: 0;
+    }
+}

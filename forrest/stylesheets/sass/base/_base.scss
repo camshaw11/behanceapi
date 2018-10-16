@@ -1,0 +1,17 @@
+//*******************//
+//**** Base SASS ****//
+//*******************//
+
+html,
+body {
+    color: $darkColor;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #A5DFE7, #C7EC75) no-repeat;
+}
+
+hr {
+    margin: 10px 0;
+}
